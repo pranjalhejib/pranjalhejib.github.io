@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="text" href="text.txt">
+    <title>CSS3</title>
+</head>
+<body>
+   <div class="img">
+        <img src="codespotw.png" alt="codespot.com">
+    </div>
+    <div class="topnav">
+    <a class="active" href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="about.html">About</a>
+    <a href="joinus.html">Join Us</a>
+    <a href="contact.html">Contact</a>
+    </div><br>
+
+    
+    <div class="sidenav">
+        <div class="sidetext">KNOW ABOUT:</div>
+        <a href="index.html"target="_self">Programming</a>
+        <a href="c.html"target="_self">C</a>
+        <a  href="html.htm" target="_self">HTML</a>
+        <a href="js.htm" target="_self">Javascript</a>
+        <a class="active1" href="css.htm"target="_self">CSS</a>
+        <a href="java.htm"target="_self">Java</a>
+        </div> 
+        <!--css3--><br>
+        <div class="programming">
+            <h1 style="background-color:white;font-family: 'Crimson Text', serif;color: black;"><br>css 3: Cascading Style Sheet</h1>
+    
+            <img src="css.png" alt="css3" height="150px">
+            <h2 class="h2"><hr>Introduction:</h2>
+            CSS is used to control the style of a web document in a simple and easy way. CSS is the acronym for "Cascading Style Sheet". This tutorial covers both the versions CSS1,CSS2 and CSS3, and gives a complete understanding of CSS, starting from its basics to advanced concepts.CSS is a widely used language on the web.<br>
+            HTML, CSS and JavaScript are used for web designing. It helps the web designers to apply style on HTML tags.<br>
+           <h2 class="h2"><hr>CSS Rules</h2>
+           CSS Rules are the styles that we have to create in order to create style sheets. These rules define appearance of associated HTML element. The general form of CSS syntax is as follows:<br>
+           <b>Selector {property: value;}</b><br><br>
+           <b class="align">Key Points:</b> <br>
+        Selector is HTML element to which CSS rule is applied.<br>
+
+        Property specifies the attribute that you want to change corresponding to the selector.<br>
+
+        Property can take specified value.<br>
+
+        Property and Value are separated by a colon (:).<br>
+
+        Each declaration is separated by semi colon (;).<br>
+        <h2 class="h2"><hr>Embedding CSS into HTML</h2>
+        <div class="align">
+           <b> Following are the four methods to add CSS to HTML documents.</b><br><br>
+        1) Inline Style Sheets<br>
+
+        2) Embedded Style Sheets<br>
+
+        3) External Style Sheets<br>
+
+        4) Imported Style Sheets<br>
+
+        </div>
+        <h2 class="h2"><hr>External style sheets</h2>
+        External Style Sheets are the separate .css files that contain the CSS rules. These files can be linked to any HTML documents using <link> tag with rel attribute.<br>
+
+Syntax:<br>
+<xmp><head> 
+<link rel= “stylesheet”  type=”text/css” href= “url of css file”>
+</head>
+</xmp>
+        
+<h2 class="h2"><hr>In order to create external css and link it to HTML document, follow the following steps:</h2><br>
+First of all create a CSS file and define all CSS rules for several HTML elements. Let’s name this file as <span style="color: red;">external.css</span>.<br>
+<xmp>
+p{ 
+   Color: orange;
+   text-align:  left;
+   font-size: 10pt;
+}
+h1{ 
+   Color: orange;     
+   font-weight: bold;
+}
+</xmp>
+*Now create HTML document and name it as <span style="color: red;">externaldemo.html</span>.<br>
+
+
+
+
+
+
+            <h2 class="h2"><hr>References:</h2>
+            <ul class="references">
+                <li><a href="https://www.w3schools.com/css/" target="_blank">W3Schools</a></li>
+                <li><a href="https://www.javatpoint.com/css-tutorial" target="_blank">Javatpoint</a></li>
+                <li><a href="https://www.sololearn.com/Course/CSS/" target="_blank">SoloLearn</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets" target="_blank">Wikipedia</a></li>
+                <li><a href="https://www.tutorialspoint.com/css/index.htm">TutorialsPoint</a></li>
+            </ul>
+            <h2 class="h2"><hr>Video Tutorial:</h2>
+            <iframe width="420" height="345" src="https://www.youtube.com/embed/1Rs2ND1ryYc"> </iframe><hr>
+            </div>
+            <!--<div class="footer">
+            <img src="codespot.png" alt="CodeSpot.com" height="50px">
+            </div>-->
+            <div class="footer">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <br>
+               Copyright &copy 2020 CodeSpot
+            </div>
+            </body>
+            </html>

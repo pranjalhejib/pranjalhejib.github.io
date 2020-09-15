@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="text" href="text.txt">
+    <title>C Language</title>
+</head>
+<body>
+   <div class="img">
+        <img src="codespotw.png" alt="codespot.com">
+    </div>
+    <div class="topnav">
+    <a class="active" href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="about.html">About</a>
+    <a href="joinus.html">Join Us</a>
+    <a href="contact.html">Contact</a>
+    </div><br>
+    
+    <div class="sidenav">
+        <div class="sidetext">KNOW ABOUT:</div>
+        <a href="index.html">Programming</a>
+        <a class="active1" href="c.html" target="_self">C</a>
+        <a href="html.htm" target="_self">HTML</a>
+        <a href="js.htm" target="_self">Javascript</a>
+        <a href="css.htm"target="_self">CSS</a>
+        <a href="java.htm"target="_self">Java</a>
+        </div> 
+    <!--C Language--><br>
+    <div class="programming">
+        <h1 style="background-color:white;font-family: 'Crimson Text', serif;"><br>C LANGUAGE</h1>
+        <img src="C.png" alt="cprogramming" height="150px">
+       <h2 class="h2"><hr>INTRODUCTION:</h2>
+        C is a procedural programming language. It was initially developed by Dennis Ritchie in the year 1972. It was mainly developed as a system programming language to write an operating system. The main features of C language include low-level access to memory, a simple set of keywords, and clean style, these features make C language suitable for system programmings like an operating system or compiler development.
+        Many later languages have borrowed syntax/features directly or indirectly from C language. Like syntax of Java, PHP, JavaScript, and many other languages are mainly based on C language. C++ is nearly a superset of C language (There are few programs that may compile in C, but not in C++).
+        <h2 class="h2"><hr>Beginning with C programming:</h2>
+        <b>1) Structure of a C program:</b><br>
+After the above discussion, we can formally assess the structure of a C program. By structure, it is meant that any program can be written in this structure only. Writing a C program in any other structure will hence lead to a Compilation Error.<br>
+<img src="StructureOfCprogram.png" alt="cstructure" height="350px"><br>
+<div style="text-align: left;"><u>source: geeksforgeeks.org</u></div>
+
+<div style="text-align: left; padding:0 15px 0 15px;" ><b>The components of the above structure are:</b><br>
+
+<b>Header Files Inclusion:</b> The first and foremost component is the inclusion of the Header files in a C program.<br>
+A header file is a file with extension .h which contains C function declarations and macro definitions to be shared between several source files.<br>
+<b>Some of C Header files:</b><br>
+stddef.h – Defines several useful types and macros.<br>
+stdint.h – Defines exact width integer types.<br>
+stdio.h – Defines core input and output functions<br>
+stdlib.h – Defines numeric conversion functions, pseudo-random network generator, memory allocation<br>
+string.h – Defines string handling functions<br>
+math.h – Defines common mathematical functions<br>
+<b>Syntax to include a header file in C:</b>#include<br>
+<b>Main Method Declaration:</b> The next part of a C program is to declare the main() function. The syntax to declare the main function is:<br>
+<b>Syntax to Declare main method:</b>
+<pre style="text-align: center;">
+int main()
+{}</pre>
+<b>Variable Declaration:</b> The next part of any C program is the variable declaration. It refers to the variables that are to be used in the function. Please note that in the C program, no variable can be used without being declared. Also in a C program, the variables are to be declared before any operation in the function.<br>
+Example: 
+<pre style="text-align: center;">
+int main()
+{
+    int a;
+.
+.</pre>
+<b>Body:</b> Body of a function in C program, refers to the operations that are performed in the functions. It can be anything like manipulations, searching, sorting, printing, etc.<br>
+Example: 
+<pre style="text-align: center;">
+int main()
+{
+    int a;
+
+    printf("%d", a);
+.
+.</pre>
+<b>Return Statement:</b> The last part in any C program is the return statement. The return statement refers to the returning of the values from a function. This return statement and return value depend upon the return type of the function. For example, if the return type is void, then there will be no return statement. In any other case, there will be a return statement and the return value will be of the type of the specified return type.<br></div>
+
+<h2 class="h2"><hr>How to execute a program:</h2>
+Inorder to execute the above program, we need to have a compiler to compile and run our programs. There are certain online compilers like https://ide.geeksforgeeks.org/, http://ideone.com/ or http://codepad.org/ that can be used to start C without installing a compiler.<br>
+Windows: There are many compilers available freely for compilation of C programs like Code Blocks  and Dev-CPP. We strongly recommend Code Blocks.<br>
+
+Linux: For Linux, gcc comes bundled with the linux,  Code Blocks can also be used with Linux.<br>
+<h2 class="h2"><hr>References:</h2>
+<ul class="references">
+    <li><a href="https://www.geeksforgeeks.org/c-language-set-1-introduction/" target="_blank">GeeksforGeeks</a></li>
+    <li><a href="https://www.programiz.com/c-programming" target="_blank">Programiz</a></li>
+    <li><a href="https://www.sololearn.com/Course/C/" target="_blank">SoloLearn</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">Wikipedia</a></li>
+    <li><a href="https://www.tutorialspoint.com/cprogramming/index.htm">TutorialsPoint</a></li>
+</ul>
+<h2 class="h2"><hr>Video Tutorial:</h2>
+<iframe width="420" height="345" src="https://www.youtube.com/embed/iT_553vTyzI"></iframe><hr>
+</div>
+<!--<div class="footer">
+<img src="codespot.png" alt="CodeSpot.com" height="50px">
+</div>-->
+<div class="footer">
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-instagram"></a>
+    <br>
+   Copyright &copy 2020 CodeSpot
+</div>
+</div>  
+</body>
+</html>
