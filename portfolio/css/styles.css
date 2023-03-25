@@ -1,0 +1,134 @@
+body {
+  background-color: #0A192F;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* LOADER --------------------------------------------------------------------- */
+/* Styling for the loader */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0A192F;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader img {
+  width: 5.25rem;
+  height: 5.25rem;
+  /* max-width: 100%; */
+  /* max-height: 100%; */
+}
+
+/* Styling for the content */
+.content {
+  display: none;
+}
+
+/* navbar---------------------------------------------------------------------- */
+.navbar {
+  text-transform: uppercase;
+}
+
+.nav-link:hover {
+  color: #64FFDA !important;
+}
+
+/* section 1-------------------------------------------------------------------- */
+.section1 {
+  position: relative;
+  /* height: 200.3vh; Set section height to full viewport height */
+
+}
+
+.social-icons {
+  /* position: relative; */
+  width: auto;
+  right: auto;
+  left: 1.2rem;
+  /* transform: translateX(-50%); */
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.social-icons li {
+  /* margin-bottom: 10px; */
+  list-style: none;
+}
+
+.social-icons li a {
+  display: block;
+  color: #64FFDA;
+  font-size: 20px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  /* border-radius: 50%; */
+
+}
+
+.social-icons li a:hover {
+  color: #CCD6F6;
+  background-color: transparent;
+}
+
+/* Vertical Line -------------------------------------------------------------- */
+.vertical-line {
+  border-left: 1px solid #64FFDA;
+  height: 100px;
+}
+
+/* SECTION 3---------------------------------------------------------------------- */
+.section3 {
+  position: relative;
+  /* height: 200.3vh; Set section height to full viewport height */
+
+}
+
+.vmail {
+  /* position: relative; */
+  /* width: auto; */
+  left: auto;
+  right: -4.0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.vmail h5 {
+  margin-bottom: 9.5rem;
+}
+
+.vmail a {
+  display: block;
+  color: #64FFDA;
+  font-size: 15px;
+  /* margin-bottom: 0px; */
+  /* background-color: transparent; */
+  text-decoration: none;
+  /* border-radius: 50%; */
+
+}
+
+.vmail a:hover {
+  color: #CCD6F6;
+  /* background-color: transparent; */
+}
+
+
+/* FOOTER-------------------------------------------------------- */
+footer {
+  font-size: smaller;
+  bottom: 0px;
+  margin-top: 5rem;
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+}

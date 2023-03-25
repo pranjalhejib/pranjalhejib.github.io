@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pranjal Hejib</title>
+
+  <!-- FAVICON -->
+  <!-- FAVICON -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+  <link rel="manifest" href="./favicon/site.webmanifest">
+
+  <!-- BOOTSTRAPS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <!-- LOADER -->
+  <div class="loader">
+    <img src="./images/loader.gif" alt="Loading...">
+  </div>
+
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg d-flex navbar-dark mt-2" style="background-color: #0A192F;">
+    <div class="container-fluid">
+      <a href="index.html" class="navbar-brand mx-4"><img src="./images/logo.png" class="img-fluid" alt="logo"
+          height="50px" width="55px"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="#"
+              style="transition-delay: 0ms; color: #CCD6F6;">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#" style="color: #CCD6F6;">About</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#" style="color: #CCD6F6;">Projects</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#" style="color: #CCD6F6;">Work</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#" style="color: #CCD6F6;">Contact</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a href="https://drive.google.com/file/d/19KtO5-7TdOD-499zuoeugog3K7CThLMB/view?usp=sharing">
+              <button type="button" class="btn btn-outline-success"
+                style="border-color: #64FFDA; color:#64FFDA;">RESUME</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- SECTION 1 -->
+      <div class="col-lg-2" style="background-color: #0A192F;">
+        <section class="section1">
+          <ul class="social-icons fixed-bottom">
+            <li><a href="#"><i class="fab fa-github"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-medium"></i></a></li>
+
+            <div class="vertical-line"></div>
+          </ul>
+        </section>
+      </div>
+
+
+      <!-- SECTION 2 -->
+      <div class="col-lg-8 text-light" style="background-color: #0A192F;">
+        
+        <div class="container-fluid pt-5 mt-5">
+
+        <h6 style="color: #64FFDA;">Hi, my name is</h6>        
+        <h1 style="font-family: calibri; letter-spacing: 0.1rem; font-size: 5rem;"><strong>Pranjal Hejib.</strong></h1>
+        <h1><strong style="font-family: calibri; color: #CCD6F6;">I build things for the web.</strong></h1><br>
+
+        <p>I’m a software engineer specializing in building (and occasionally <br>designing) exceptional digital experiences. Currently, I’m focused <br>on building accessible, human-centered products.</p><br>
+        <a href="#">
+          <button type="button" class="btn btn-outline-success"
+            style="border-color: #64FFDA; color:#64FFDA;">Know More</button>
+        </a>
+        </div>
+
+
+        <!-- footer -->
+        <footer class="text-center" style="color: #CCD6F6;">
+          <p>&copy; 2023 All Rights Reserved <br> Designed & Built by Pranjal Hejib</p>
+        </footer>
+      </div>
+
+
+
+      <!-- SECTION 3 -->
+      <div class="col-lg-2" style="background-color: #0A192F;">
+        <section class="section3">
+          <div class="vmail fixed-bottom">
+            <h5 style="letter-spacing: 4px; transform: rotate(90deg); color: #CCD6F6;"><a
+                href="mailto:hejibpranjal@gmail.com">hejibpranjal@gmail.com</a></h5>
+            <div class="vertical-line"></div>
+          </div>
+        </section>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+  <!-- LOADER SCRIPT -->
+  <script>
+    // Wait for 4 seconds before showing the content
+    setTimeout(function() {
+      document.querySelector(".loader").style.display = "none";
+      document.querySelector(".content").style.display = "block";
+    }, 2000);
+  </script>
+
+  <!-- BOOTSTRAP JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
