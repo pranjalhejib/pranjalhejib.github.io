@@ -187,6 +187,25 @@ body {
 }
 
 
+
+/* hidden social links */
+
+
+.social a {
+  display: inline-block;
+  color: #64FFDA;
+  margin:0 5px 0 5px;
+  font-size: 20px;
+  background-color: transparent;
+  /* border-radius: 50%; */
+
+}
+
+.social a:hover {
+  color: #CCD6F6;
+  background-color: transparent;
+}
+
 /* .image-container {
 
   position: relative;
