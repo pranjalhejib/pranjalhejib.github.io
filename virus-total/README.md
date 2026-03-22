@@ -1,4 +1,4 @@
-# IP Reputation Checker - SOC Tool
+# Bulk IP Reputation Checker
 
 A free, browser-based bulk IP reputation lookup tool built for SOC analysts. No backend. No cost. Just open and use.
 
