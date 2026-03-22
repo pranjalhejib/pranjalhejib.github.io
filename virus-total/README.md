@@ -26,7 +26,7 @@ This tool solves that by:
 ## How to use it
 
 ### Step 1 - Get a free VirusTotal API key
-Sign up at [virustotal.com/gui/join- community](https://www.virustotal.com/gui/join-community). It's free. The free tier allows 4 requests/minute - the tool handles rate limiting automatically.
+Sign up at [virustotal.com/gui/join-community](https://www.virustotal.com/gui/join-community). It's free. The free tier allows 4 requests/minute - the tool handles rate limiting automatically.
 
 ### Step 2 - Open the tool
 Access the Link. This is hosted on GitHub Pages.
@@ -41,11 +41,11 @@ Access the Link. This is hosted on GitHub Pages.
 Each IP gets a row showing:
 
 | Column | What it means |
-|- - -|- - -|
+|---|---|
 | Verdict | malicious / suspicious / clean / unknown |
 | Detections | How many vendors flagged it out of total scanned |
 | VT Verdict Text | Exact text VT shows e.g. "94/94 security vendors flagged this IP as malicious" |
-| Country | Geo- location of the IP |
+| Country | Geo-location of the IP |
 | Owner / ASN | Who owns the IP block |
 | Engines flagged | Which specific AV/threat engines raised the flag |
 | VT Report | Direct link to full VirusTotal report |
