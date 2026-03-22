@@ -26,7 +26,7 @@ This tool solves that by:
 ## How to use it
 
 ### Step 1 - Get a free VirusTotal API key
-Sign up at [virustotal.com/gui/join- community](https://www.virustotal.com/gui/join- community). It's free. The free tier allows 4 requests/minute - the tool handles rate limiting automatically.
+Sign up at [virustotal.com/gui/join- community](https://www.virustotal.com/gui/join-community). It's free. The free tier allows 4 requests/minute - the tool handles rate limiting automatically.
 
 ### Step 2 - Open the tool
 Access the Link. This is hosted on GitHub Pages.
@@ -41,7 +41,7 @@ Access the Link. This is hosted on GitHub Pages.
 Each IP gets a row showing:
 
 | Column | What it means |
-|- - - |- - - |
+|- - -|- - -|
 | Verdict | malicious / suspicious / clean / unknown |
 | Detections | How many vendors flagged it out of total scanned |
 | VT Verdict Text | Exact text VT shows e.g. "94/94 security vendors flagged this IP as malicious" |
@@ -52,17 +52,6 @@ Each IP gets a row showing:
 
 ### Step 5 - Export
 Click **Export CSV** to download results for your incident report or ticket.
-
-- - - 
-
-## Deploying to GitHub Pages (team access)
-
-1. Create a free account at [github.com](https://github.com)
-2. Create a new **public** repository
-3. Upload `index.html` (rename from `ip- reputation- checker.html` if needed)
-4. Go to **Settings → Pages → Deploy from branch (main)**
-5. Wait ~60 seconds
-6. Share `https://YOUR- USERNAME.github.io/REPO- NAME/` with your team
 
 - - - 
 
