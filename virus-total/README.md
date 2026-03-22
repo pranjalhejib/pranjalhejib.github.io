@@ -1,4 +1,4 @@
-# Bulk IP Reputation Checker
+# Bulk IP Reputation Checker - VirusTotal API
 
 A free, browser-based bulk IP reputation lookup tool built for SOC analysts. No backend. No cost. Just open and use.
 
