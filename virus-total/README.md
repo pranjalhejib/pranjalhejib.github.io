@@ -2,8 +2,6 @@
 
 A free, browser-based bulk IP reputation lookup tool built for SOC analysts. No backend. No cost. Just open and use.
 
-**API quota allowances**
-
 _As per VirusTotal, the standard non-premium (free Public API) users are subjected to the following limitations:_
 - Request rate 	4 lookups / min
 - Daily quota 	500 lookups / day
