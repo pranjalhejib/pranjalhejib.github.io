@@ -283,7 +283,7 @@
   </div>
 
   <footer class="footer">
-    <span>Designed & Built with &#10084;&#xfe0f; By Pranjal Hejib · IP Reputation Checker · Powered by VirusTotal Free API </span>
+    <span>Designed & Built with &#10084;&#xfe0f; By Pranjal Hejib · IP Reputation Checker v1.1 · Powered by VirusTotal Free API </span>
     <span id="runTime"></span>
   </footer>
 
@@ -355,7 +355,7 @@
     const resp = await fetch(proxyUrl, { headers: { 'x-apikey': apiKey } });
     if (resp.status === 429) throw new Error('rate_limit');
     if (resp.status === 404) throw new Error('not_found');
-    if (resp.status === 401) throw new Error('Invalid API key — check your VT key');
+    if (resp.status === 401) throw new Error('Invalid API key - check your VT key');
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     return resp.json();
   }
@@ -460,7 +460,7 @@
             break;
           } catch(e) {
             if (e.message === 'rate_limit') {
-              document.getElementById('progressText').textContent = `Rate limited — waiting 20s... (${ip})`;
+              document.getElementById('progressText').textContent = `Rate limited - waiting 20s... (${ip})`;
               await sleep(20000);
               retries++;
             } else { throw e; }
