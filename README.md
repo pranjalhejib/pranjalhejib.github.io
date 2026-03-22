@@ -1,3 +1,3 @@
-### [1] My Portfolio-Site [Hosted on GitHub Pages] [Portfolio](https://pranjalhejib.github.io/portfolio/)
-### [2] Codespot Website: [codespot](https://pranjalhejib.github.io/codespot/)
-### [3] Bulk IP Reputation Checker: [Virus Total](https://pranjalhejib.github.io/virus-total/)
+### i. My Portfolio-Site [Hosted on GitHub Pages] [Portfolio](https://pranjalhejib.github.io/portfolio/)
+### ii. Codespot Website: [codespot](https://pranjalhejib.github.io/codespot/)
+### iii. Bulk IP Reputation Checker: [Virus Total](https://pranjalhejib.github.io/virus-total/)
