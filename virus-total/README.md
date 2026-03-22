@@ -1,4 +1,4 @@
-# IP Reputation Checker — SOC Tool
+# IP Reputation Checker | SOC Tool
 
 Bulk VirusTotal IP reputation lookup. Free, no backend, team-ready.
 
