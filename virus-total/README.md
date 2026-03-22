@@ -1,22 +1,23 @@
 # 🛡️ IP Reputation Checker - SOC Tool
 
-A free, browser- based bulk IP reputation lookup tool built for SOC analysts. No backend. No cost. Just open and use.
+A free, browser-based bulk IP reputation lookup tool built for SOC analysts. No backend. No cost. Just open and use.
 
 - - - 
 
 ## What is this?
 
-A lightweight web tool that lets you paste a list of IP addresses and instantly check their reputation against **94+ security vendors** via the VirusTotal API - all from a single HTML file your team can share.
+A lightweight web tool that lets you paste a list of IP addresses and instantly check their reputation against **94+ security vendors** via the VirusTotal API.
 
 - - - 
 
 ## Why was it built?
 
-Most teams don't have access to premium threat intel platforms. During incident response or alert triage, analysts often end up manually checking IPs one- by- one on the VirusTotal website - which is slow and doesn't scale.
+Most teams don't have access to premium threat intel platforms. During incident response or alert triage, analysts often end up manually checking IPs one-by-one on the VirusTotal website - which is slow and doesn't scale.
 
 This tool solves that by:
 -  Allowing **bulk lookups** in one go
 -  Showing results in a clean, scannable table
+-  Exportable in .CSV
 -  Working entirely in the browser - no server, no subscription, no setup
 -  Being shareable across the whole team via a single URL (GitHub Pages)
 
@@ -28,7 +29,7 @@ This tool solves that by:
 Sign up at [virustotal.com/gui/join- community](https://www.virustotal.com/gui/join- community). It's free. The free tier allows 4 requests/minute - the tool handles rate limiting automatically.
 
 ### Step 2 - Open the tool
-Either open `index.html` directly in your browser, or access the hosted version on GitHub Pages (see deployment below).
+Access the Link. This is hosted on GitHub Pages.
 
 ### Step 3 - Run a lookup
 1. Paste your IPs in the text box - one per line
