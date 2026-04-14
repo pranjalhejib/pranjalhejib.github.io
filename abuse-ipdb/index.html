@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AbuseIPDB Bulk Checker — SOC Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0d0f0e;
+    --surface: #121a14;
+    --surface2: #182019;
+    --border: #1e2d21;
+    --border2: #243628;
+    --text: #e2f0e5;
+    --muted: #6b8f72;
+    --accent: #22c55e;
+    --accent-glow: rgba(34,197,94,0.18);
+    --mal: #ef4444;
+    --mal-bg: rgba(239,68,68,0.12);
+    --sus: #f59e0b;
+    --sus-bg: rgba(245,158,11,0.12);
+    --cln: #22c55e;
+    --cln-bg: rgba(34,197,94,0.12);
+    --unk: #6b8f72;
+    --unk-bg: rgba(107,143,114,0.12);
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Syne', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 13px; min-height: 100vh; }
+
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+    pointer-events: none; z-index: 9999;
+  }
+
+  .container { max-width: 1150px; margin: 0 auto; padding: 0 24px 60px; }
+
+  header { padding: 36px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+  .header-top { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .logo-badge {
+    background: var(--accent); color: #000;
+    font-family: var(--display); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; padding: 4px 10px; border-radius: 4px; text-transform: uppercase;
+  }
+  .header-tag { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+  h1 { font-family: var(--display); font-size: 32px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; line-height: 1; }
+  h1 span { color: var(--accent); }
+  .header-sub { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  .input-grid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; margin-bottom: 20px; }
+  @media (max-width: 700px) { .input-grid { grid-template-columns: 1fr; } }
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .panel-label {
+    font-family: var(--display); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .panel-label::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  textarea, input[type=text], input[type=password], select {
+    width: 100%; background: var(--bg);
+    border: 1px solid var(--border2); border-radius: 6px;
+    color: var(--text); font-family: var(--mono); font-size: 12px;
+    padding: 10px 12px; outline: none; transition: border-color 0.2s;
+  }
+  textarea:focus, input:focus, select:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  textarea { min-height: 160px; resize: vertical; line-height: 1.8; }
+  ::placeholder { color: var(--muted); opacity: 0.6; }
+  select option { background: var(--bg); }
+
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+  .field-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.05em; }
+
+  .key-wrap { position: relative; }
+  .key-wrap input { padding-right: 40px; }
+  .toggle-key {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; color: var(--muted); font-size: 11px; font-family: var(--mono); padding: 2px 4px;
+  }
+  .toggle-key:hover { color: var(--text); }
+
+  .hint { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .hint a { color: var(--accent); text-decoration: none; }
+  .hint a:hover { text-decoration: underline; }
+
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .btn {
+    padding: 10px 20px; border-radius: 6px; font-family: var(--mono);
+    font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border2);
+    background: var(--surface); color: var(--text); transition: all 0.15s; letter-spacing: 0.03em;
+  }
+  .btn:hover { background: var(--surface2); }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); font-weight: 700; }
+  .btn-primary:hover { background: #16a34a; border-color: #16a34a; }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .btn-ghost { background: transparent; color: var(--muted); }
+  .btn-ghost:hover { color: var(--text); background: var(--surface); }
+
+  .progress-bar-wrap { margin-bottom: 12px; display: none; }
+  .progress-track { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+  .progress-text { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+  .stats-row { display: none; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; min-width: 100px; }
+  .stat-num { font-family: var(--display); font-size: 26px; font-weight: 800; line-height: 1; }
+  .stat-lbl { font-size: 10px; color: var(--muted); margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .stat.mal .stat-num { color: var(--mal); }
+  .stat.sus .stat-num { color: var(--sus); }
+  .stat.cln .stat-num { color: var(--cln); }
+
+  .error-box {
+    background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--mal); margin-bottom: 20px; display: none;
+  }
+
+  .table-wrap { display: none; overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  thead { background: var(--surface); }
+  th {
+    text-align: left; padding: 12px 14px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);
+  }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; word-break: break-word; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface); }
+  tr.row-mal { border-left: 3px solid var(--mal); }
+  tr.row-sus { border-left: 3px solid var(--sus); }
+  tr.row-cln { border-left: 3px solid var(--cln); }
+  tr.row-unk { border-left: 3px solid var(--border2); }
+
+  .ip-cell { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--text); }
+
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    padding: 3px 9px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .badge.mal { background: var(--mal-bg); color: var(--mal); }
+  .badge.sus { background: var(--sus-bg); color: var(--sus); }
+  .badge.cln { background: var(--cln-bg); color: var(--cln); }
+  .badge.unk { background: var(--unk-bg); color: var(--unk); }
+
+  /* Confidence score ring */
+  .score-wrap { display: flex; align-items: center; gap: 10px; }
+  .score-ring { position: relative; width: 38px; height: 38px; flex-shrink: 0; }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring .track { fill: none; stroke: var(--border2); stroke-width: 3.5; }
+  .score-ring .fill { fill: none; stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+  .score-ring .label {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+  }
+  .score-detail { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .score-detail strong { color: var(--text); font-size: 12px; }
+
+  .usage-tag {
+    display: inline-block; font-size: 10px; padding: 2px 7px;
+    border-radius: 3px; background: var(--surface2); color: var(--muted);
+    border: 1px solid var(--border2);
+  }
+
+  .vt-link { color: var(--accent); text-decoration: none; font-size: 11px; }
+  .vt-link:hover { text-decoration: underline; }
+
+  .footer { margin-top: 48px; border-top: 1px solid var(--border); padding-top: 20px; font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .cursor { display: inline-block; width: 8px; height: 13px; background: var(--accent); margin-left: 2px; vertical-align: middle; animation: blink 1s infinite; }
+
+  @keyframes fadeSlide { from { opacity:0; transform: translateY(4px); } to { opacity:1; transform: translateY(0); } }
+  .animated-row { animation: fadeSlide 0.25s ease forwards; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="header-top">
+      <span class="logo-badge">SOC</span>
+      <span class="header-tag">// threat-intel / abuse-reputation</span>
+    </div>
+    <h1>AbuseIPDB <span>Checker</span><span class="cursor"></span></h1>
+    <p class="header-sub">Bulk IP abuse confidence lookup · AbuseIPDB API · Free · No backend required</p>
+  </header>
+
+  <div class="input-grid">
+    <div class="panel">
+      <div class="panel-label">IP Addresses</div>
+      <textarea id="ipInput" placeholder="Paste IPs here, one per line:&#10;&#10;8.8.8.8&#10;1.1.1.1&#10;185.220.101.1&#10;45.33.32.156"></textarea>
+      <p class="hint" style="margin-top:8px;">One IP per line. IPv4 &amp; IPv6 supported. Free tier: 1,000 checks/day.</p>
+    </div>
+    <div class="panel">
+      <div class="field">
+        <div class="panel-label">Configuration</div>
+        <div class="field-label">AbuseIPDB API Key</div>
+        <div class="key-wrap">
+          <input type="password" id="apiKey" placeholder="Paste your free API key" />
+          <button class="toggle-key" onclick="toggleKey()" id="toggleBtn">show</button>
+        </div>
+        <p class="hint">Free key: <a href="https://www.abuseipdb.com/register" target="_blank">abuseipdb.com/register</a><br>1,000 checks/day on free tier.</p>
+      </div>
+      <div class="field">
+        <div class="field-label">Max Age of Reports (days)</div>
+        <select id="maxAge">
+          <option value="30">Last 30 days</option>
+          <option value="60">Last 60 days</option>
+          <option value="90" selected>Last 90 days</option>
+          <option value="180">Last 180 days</option>
+          <option value="365">Last 1 year</option>
+        </select>
+        <p class="hint" style="margin-top:6px;">Only count abuse reports within this period.</p>
+      </div>
+      <div class="field">
+        <div class="field-label">Flag threshold (abuse score %)</div>
+        <select id="threshold">
+          <option value="25">25% — Aggressive</option>
+          <option value="50" selected>50% — Balanced</option>
+          <option value="75">75% — Conservative</option>
+          <option value="90">90% — High confidence only</option>
+        </select>
+      </div>
+      <div class="field">
+        <div class="field-label">Save API Key locally</div>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="saveKey" style="width:auto;accent-color:var(--accent)" />
+          <span style="color:var(--muted);font-size:11px;">Remember in localStorage (this browser only)</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" id="checkBtn" onclick="startCheck()">&#9654; Run Lookup</button>
+    <button class="btn" onclick="loadSample()">Load sample IPs</button>
+    <button class="btn btn-ghost" id="exportBtn" onclick="exportCSV()" style="display:none">&#8615; Export CSV</button>
+    <button class="btn btn-ghost" id="clearBtn" onclick="clearAll()" style="display:none">&#10005; Clear</button>
+  </div>
+
+  <div class="progress-bar-wrap" id="progressWrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">Initializing...</div>
+  </div>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <div class="stats-row" id="statsRow">
+    <div class="stat"><div class="stat-num" id="sTotal">0</div><div class="stat-lbl">Total</div></div>
+    <div class="stat mal"><div class="stat-num" id="sMal">0</div><div class="stat-lbl">Malicious</div></div>
+    <div class="stat sus"><div class="stat-num" id="sSus">0</div><div class="stat-lbl">Suspicious</div></div>
+    <div class="stat cln"><div class="stat-num" id="sCln">0</div><div class="stat-lbl">Clean</div></div>
+    <div class="stat"><div class="stat-num" id="sUnk">0</div><div class="stat-lbl">Unknown / Error</div></div>
+  </div>
+
+  <div class="table-wrap" id="tableWrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:14%">IP Address</th>
+          <th style="width:11%">Verdict</th>
+          <th style="width:18%">Abuse Confidence</th>
+          <th style="width:8%">Country</th>
+          <th style="width:16%">ISP</th>
+          <th style="width:13%">Usage Type</th>
+          <th style="width:10%">Total Reports</th>
+          <th style="width:10%">AbuseIPDB</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <footer class="footer">
+    <span>IP Reputation Checker · AbuseIPDB API · SOC Tool · Zero cost, no backend</span>
+    <span id="runTime"></span>
+  </footer>
+
+</div>
+
+<script>
+  let results = [];
+  let running = false;
+
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('abuseipdb_api_key');
+    if (saved) {
+      document.getElementById('apiKey').value = saved;
+      document.getElementById('saveKey').checked = true;
+    }
+  });
+
+  function toggleKey() {
+    const el = document.getElementById('apiKey');
+    const btn = document.getElementById('toggleBtn');
+    if (el.type === 'password') { el.type = 'text'; btn.textContent = 'hide'; }
+    else { el.type = 'password'; btn.textContent = 'show'; }
+  }
+
+  function loadSample() {
+    document.getElementById('ipInput').value = '8.8.8.8\n1.1.1.1\n185.220.101.1\n45.33.32.156\n91.108.4.1\n198.51.100.1';
+  }
+
+  function clearAll() {
+    results = [];
+    document.getElementById('ipInput').value = '';
+    document.getElementById('tbody').innerHTML = '';
+    document.getElementById('statsRow').style.display = 'none';
+    document.getElementById('tableWrap').style.display = 'none';
+    document.getElementById('exportBtn').style.display = 'none';
+    document.getElementById('clearBtn').style.display = 'none';
+    document.getElementById('errorBox').style.display = 'none';
+    document.getElementById('runTime').textContent = '';
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errorBox');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function getVerdict(score, threshold) {
+    if (score === null || score === undefined) return 'unknown';
+    if (score >= threshold) return 'malicious';
+    if (score >= Math.floor(threshold / 2)) return 'suspicious';
+    return 'clean';
+  }
+
+  function verdictClass(v) {
+    return { malicious:'mal', suspicious:'sus', clean:'cln', unknown:'unk' }[v] || 'unk';
+  }
+
+  function scoreColor(score) {
+    if (score >= 75) return 'var(--mal)';
+    if (score >= 25) return 'var(--sus)';
+    return 'var(--cln)';
+  }
+
+  async function queryAbuseIPDB(ip, apiKey, maxAge) {
+    const vtUrl = `https://api.abuseipdb.com/api/v2/check?ipAddress=${encodeURIComponent(ip)}&maxAgeInDays=${maxAge}&verbose`;
+    const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(vtUrl)}`;
+    const resp = await fetch(proxyUrl, {
+      headers: {
+        'Key': apiKey,
+        'Accept': 'application/json'
+      }
+    });
+    if (resp.status === 429) throw new Error('rate_limit');
+    if (resp.status === 404) throw new Error('not_found');
+    if (resp.status === 401) throw new Error('Invalid API key — check your AbuseIPDB key');
+    if (resp.status === 422) throw new Error('Invalid IP address format');
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    return resp.json();
+  }
+
+  function buildScoreRing(score, color) {
+    const r = 15;
+    const circ = 2 * Math.PI * r;
+    const offset = circ - (score / 100) * circ;
+    return `
+      <div class="score-ring">
+        <svg width="38" height="38" viewBox="0 0 38 38">
+          <circle class="track" cx="19" cy="19" r="${r}"/>
+          <circle class="fill" cx="19" cy="19" r="${r}"
+            stroke="${color}"
+            stroke-dasharray="${circ}"
+            stroke-dashoffset="${offset}"/>
+        </svg>
+        <div class="label" style="color:${color}">${score}%</div>
+      </div>`;
+  }
+
+  function addRow(result, animate) {
+    const tbody = document.getElementById('tbody');
+    const vc = verdictClass(result.verdict);
+    const score = result.abuseScore !== null ? result.abuseScore : 0;
+    const color = scoreColor(score);
+
+    const tr = document.createElement('tr');
+    tr.className = `row-${vc}${animate ? ' animated-row' : ''}`;
+    tr.innerHTML = `
+      <td class="ip-cell">${result.ip}${result.isWhitelisted ? ' <span style="color:var(--cln);font-size:10px">[whitelisted]</span>' : ''}</td>
+      <td><span class="badge ${vc}">${result.verdict}</span></td>
+      <td>
+        <div class="score-wrap">
+          ${buildScoreRing(score, color)}
+          <div class="score-detail">
+            <strong>${score}% confidence</strong><br>
+            ${result.totalReports > 0 ? `${result.totalReports} report${result.totalReports > 1 ? 's' : ''}` : 'No reports'}
+            ${result.numDistinctUsers ? ` · ${result.numDistinctUsers} source${result.numDistinctUsers > 1 ? 's' : ''}` : ''}
+          </div>
+        </div>
+        ${result.error ? `<span style="color:var(--muted);font-size:11px">${result.error}</span>` : ''}
+      </td>
+      <td style="color:var(--muted)">${result.countryCode || '—'}</td>
+      <td style="color:var(--muted);font-size:11px">${result.isp || '—'}</td>
+      <td><span class="usage-tag">${result.usageType || '—'}</span></td>
+      <td style="color:var(--muted);text-align:center">${result.totalReports !== null ? result.totalReports : '—'}</td>
+      <td><a class="vt-link" href="https://www.abuseipdb.com/check/${result.ip}" target="_blank">&#8599; View report</a></td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  function updateStats() {
+    const total = results.length;
+    const mal = results.filter(r => r.verdict === 'malicious').length;
+    const sus = results.filter(r => r.verdict === 'suspicious').length;
+    const cln = results.filter(r => r.verdict === 'clean').length;
+    const unk = results.filter(r => r.verdict === 'unknown').length;
+    document.getElementById('sTotal').textContent = total;
+    document.getElementById('sMal').textContent = mal;
+    document.getElementById('sSus').textContent = sus;
+    document.getElementById('sCln').textContent = cln;
+    document.getElementById('sUnk').textContent = unk;
+  }
+
+  async function startCheck() {
+    if (running) return;
+
+    const apiKey = document.getElementById('apiKey').value.trim();
+    const raw = document.getElementById('ipInput').value.trim();
+    const maxAge = document.getElementById('maxAge').value;
+    const threshold = parseInt(document.getElementById('threshold').value);
+
+    if (!apiKey) { showError('Please enter your AbuseIPDB API key.'); return; }
+    if (!raw) { showError('Please enter at least one IP address.'); return; }
+
+    if (document.getElementById('saveKey').checked) {
+      localStorage.setItem('abuseipdb_api_key', apiKey);
+    } else {
+      localStorage.removeItem('abuseipdb_api_key');
+    }
+
+    document.getElementById('errorBox').style.display = 'none';
+
+    const ips = [...new Set(raw.split('\n').map(l => l.trim()).filter(l => l.length > 0))];
+    if (ips.length === 0) { showError('No valid IPs found.'); return; }
+
+    running = true;
+    results = [];
+    document.getElementById('checkBtn').disabled = true;
+    document.getElementById('tbody').innerHTML = '';
+    document.getElementById('statsRow').style.display = 'flex';
+    document.getElementById('tableWrap').style.display = 'block';
+    document.getElementById('exportBtn').style.display = 'none';
+    document.getElementById('clearBtn').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'block';
+
+    const startTime = Date.now();
+
+    for (let i = 0; i < ips.length; i++) {
+      const ip = ips[i];
+      document.getElementById('progressFill').style.width = Math.round((i / ips.length) * 100) + '%';
+      document.getElementById('progressText').textContent = `[${i + 1}/${ips.length}] Checking ${ip}...`;
+
+      let result = {
+        ip, verdict: 'unknown', abuseScore: null, totalReports: null,
+        numDistinctUsers: null, countryCode: null, isp: null,
+        usageType: null, isWhitelisted: false, error: null
+      };
+
+      try {
+        let data;
+        let retries = 0;
+        while (retries < 3) {
+          try {
+            data = await queryAbuseIPDB(ip, apiKey, maxAge);
+            break;
+          } catch(e) {
+            if (e.message === 'rate_limit') {
+              document.getElementById('progressText').textContent = `Rate limited — waiting 20s... (${ip})`;
+              await sleep(20000);
+              retries++;
+            } else { throw e; }
+          }
+        }
+
+        console.log(`[AbuseIPDB Response] ${ip}:`, JSON.stringify(data, null, 2));
+
+        const d = data && data.data ? data.data : null;
+        if (d) {
+          result.abuseScore = d.abuseConfidenceScore ?? null;
+          result.totalReports = d.totalReports ?? 0;
+          result.numDistinctUsers = d.numDistinctUsers ?? 0;
+          result.countryCode = d.countryCode || null;
+          result.isp = d.isp || null;
+          result.usageType = d.usageType || null;
+          result.isWhitelisted = d.isWhitelisted || false;
+          result.verdict = getVerdict(result.abuseScore, threshold);
+        } else {
+          console.warn(`[AbuseIPDB] Unexpected shape for ${ip}:`, data);
+          result.error = 'Unexpected response';
+        }
+
+      } catch(e) {
+        console.error(`[AbuseIPDB Error] ${ip}:`, e);
+        result.error = e.message === 'not_found' ? 'Not found' : `Error: ${e.message}`;
+        result.verdict = 'unknown';
+      }
+
+      results.push(result);
+      addRow(result, true);
+      updateStats();
+
+      // AbuseIPDB free tier: 1000/day, no strict per-minute limit — 1s gap is enough
+      if (i < ips.length - 1) {
+        await sleep(1200);
+      }
+    }
+
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressText').textContent = `Done — ${ips.length} IPs checked in ${elapsed}s`;
+    document.getElementById('exportBtn').style.display = 'inline-block';
+    document.getElementById('clearBtn').style.display = 'inline-block';
+    document.getElementById('runTime').textContent = `Run completed in ${elapsed}s`;
+    running = false;
+    document.getElementById('checkBtn').disabled = false;
+  }
+
+  function exportCSV() {
+    if (!results.length) return;
+    const header = ['IP Address','Verdict','Abuse Score (%)','Total Reports','Distinct Sources','Country','ISP','Usage Type','Whitelisted','AbuseIPDB Link'];
+    const rows = results.map(r => [
+      r.ip,
+      r.verdict,
+      r.abuseScore !== null ? r.abuseScore : '',
+      r.totalReports !== null ? r.totalReports : '',
+      r.numDistinctUsers !== null ? r.numDistinctUsers : '',
+      r.countryCode || '',
+      r.isp || '',
+      r.usageType || '',
+      r.isWhitelisted ? 'Yes' : 'No',
+      `https://www.abuseipdb.com/check/${r.ip}`
+    ].map(v => `"${String(v).replace(/"/g,'""')}"`).join(','));
+    const csv = [header.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `abuseipdb_${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body>
+</html>
